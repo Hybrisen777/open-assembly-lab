@@ -8,8 +8,9 @@ Printed instructions show a few frozen moments; this shows the whole motion. Eve
 parts to the finished model, next to the original instruction page - and in VR you do the steps yourself, with your
 hands, on a table in front of you.
 
-Everything shown here comes from sources that are free to reuse: the two kits are NASA's 3D-printable models of the
-New Horizons and SOHO spacecraft, each with its own assembly instructions from the same source.
+Everything shown here comes from sources that are free to reuse: NASA's 3D-printable models of the New Horizons and
+SOHO spacecraft, and one sub-assembly of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
+from the same source.
 
 ![A step of the New Horizons kit in the desktop player](media/desktop-step.png)
 
@@ -47,29 +48,62 @@ presses the two body parts together first; here that step comes last, so that ev
 
 ![A step of the SOHO kit in the desktop player](media/desktop-soho.png)
 
-More public-domain kits can be added the same way: part meshes + step-by-step instructions in, a scenario out.
+**FarmBot Genesis v1.5: gantry wheel plate** - 5 steps, 43 parts: one plate, 9 V-wheels, 9 M5 x 30mm screws, 5 standard
+and 4 eccentric spacers, 9 flange locknuts, 2 nut bars and 4 M5 x 10mm screws - every screw, spacer and nut is its own
+part, taken from the machine's CAD model at its CAD position. Steps, their order, their text and the pictures beside
+them are the documentation's own. As the documentation says, a wheel and a spacer go onto a screw first and the stack
+then goes into the plate; the locknuts are fitted from the other side of the plate.
+
+Not shown in this assembly, because the player cannot represent it:
+- the tools (3mm hex driver, 8mm box wrench, mallet) and the tightening itself - screws and nuts are only put in place;
+- step 4, the same build repeated for the mirrored right-hand plate - the step is there with its text and picture, but
+  only the left-hand plate is built;
+- step 5, adjusting the eccentric spacers - the step is there with its text, nothing moves in it.
+
+Also different from a real workbench: a screw stands on its head on the mat while its wheel and spacer are slid on
+(a person would hold it), and the plate stands upright by itself.
+
+![A step of the gantry wheel plate in the desktop player](media/desktop-farmbot.png)
+
+More assemblies can be added the same way: part meshes + step-by-step instructions in, a scenario out.
 
 ## How it's made
 
-- **Parts** are the kit's own meshes, one object per physical part. Their assembled positions are worked out from the
-  pins and holes in the meshes.
+- **Parts** are the kit's own meshes, one object per physical part. For the printable kits their assembled positions
+  are worked out from the pins and holes in the meshes; for the machine sub-assembly they come from the CAD assembly.
 - **Assembly motion** is planned and collision-checked in a game engine (mesh against mesh along every part's path),
   then exported as engine-independent data - step timelines and poses - that this site plays with WebGL.
   A static site: no framework, no build step in the browser.
 - **VR / AR** is plain [WebXR](https://immersiveweb.dev): hand tracking, world-space panels, grab-and-snap logic.
 - **Checks**: `tools/smoke_test.js` plays every kit to the end with the mouse, then starts a hands-only VR session on
-  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9 and 7 of 7).
+  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7 and 43 of 43).
 
 ## Known limitations
 
 - The models are small and shown at real size: the New Horizons dowels are 6 mm thick, the SOHO pins 1.75 mm.
-  In VR, pull the kit bigger with both hands.
+  In VR, pull the kit bigger with both hands. The gantry wheel plate has M5 hardware: nuts and spacers of about 1 cm.
+- Gantry wheel plate: the locknuts and the nut-bar screws are fitted on the far side of the plate; the camera turns
+  there by itself on the desktop, in VR you reach around the plate. The hands-only check uses an emulated headset; it
+  shows that every part can be picked up and placed by pinching, not how comfortable that is with real hands.
 - Phone browsers without WebXR: the 3D player works, the VR / AR buttons don't appear.
 - Headset linked to a PC (Quest Link): the first VR start can take 2-3 minutes.
 
 ## Sources and credits
 
-Both kits come from the NASA 3D Resources repository, folder `3D Printing`:
+**Gantry wheel plate** - from the FarmBot Genesis v1.5 documentation
+([Assemble the gantry wheel plates](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/gantry/assemble-the-gantry-wheel-plates):
+steps, text and pictures) and the FarmBot Genesis CAD model on Onshape
+([document, version v1.5](https://cad.onshape.com/documents/6626b842adca229e69544ad1/v/d2f8602693fe1c17dfeb2b8b/e/33c3dd58328095f9e1e1dcee):
+the "Gantry Wheel Plate" assembly, left-hand configuration, exported as GLB). Both are by FarmBot Inc. and, according
+to its [licensing page](https://meta.farm.bot/v2026/farmbot/intro/licensing) (read on 18 November 2026), published
+under the CC0 Public Domain Dedication:
+> "The FarmBot CAD models are licensed under the CC0 Public Domain Dedication." -
+> "FarmBot documentation is licensed under the CC0 Public Domain Dedication."
+
+The company's logo and other brand material are not CC0 and are not used here.
+**This project is not affiliated with or endorsed by FarmBot Inc.**
+
+The two spacecraft kits come from the NASA 3D Resources repository, folder `3D Printing`:
 
 - **New Horizons** - model files (`7399_05_rp_*.stl`) and assembly instructions (`assembly.pdf`, "New Horizons RP model
   instructions", 07-15-14):
@@ -78,7 +112,7 @@ Both kits come from the NASA 3D Resources repository, folder `3D Printing`:
 - **SOHO** - model files (`Part 1.stl`, `Part 2.stl`, `Part 3.stl`) and assembly text (`readme.txt`):
   [3D Printing/Solar and Heliospheric Observatory (SOHO)](https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Solar%20and%20Heliospheric%20Observatory%20(SOHO)).
 
-Reuse statements for this source, quoted as published (read on 18 November 2026):
+Reuse statements for the NASA source, quoted as published (read on 18 November 2026):
 
 - The repository's [README](https://github.com/nasa/NASA-3D-Resources/blob/master/README.md), which covers both kits:
   > "This is a growing collection of 3D models, textures, and images from inside NASA. [...] These assets are free and

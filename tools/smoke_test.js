@@ -17,6 +17,7 @@ const SHOTS = !process.argv.includes('--no-shots');
 const KITS = [
   { slug: 'new-horizons', steps: 4, parts: 9, page: { t: 7.3, rx: /p03/, w: 1100, maxH: 760 }, shots: { parts: 'desktop-parts.png', done: 'desktop-done.png', step: 'desktop-step.png', vr: 'vr-table-hands.png' } },
   { slug: 'soho', steps: 4, parts: 7, page: { t: 2.8, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-soho.png' } },
+  { slug: 'farmbot-gantry-wheel-plate', steps: 5, parts: 43, page: { t: 3.2, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot.png' } },
 ];
 
 const fails = [];
