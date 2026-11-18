@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "folder": "new-horizons",
+      "name": "New Horizons spacecraft model",
+      "id": "NASA 3D Resources",
+      "category": "3D-printed models",
+      "mode": "assembly",
+      "thumbnail": "thumbnail.png",
+      "steps": 4
+    }
+  ],
+  "issuesUrl": "https://github.com/Hybrisen777/open-assembly-lab/issues/new"
+}
