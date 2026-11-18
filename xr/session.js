@@ -2,7 +2,7 @@
 // The scene is not moved: a rig group carries the camera and the hands / controllers, and its transform puts the
 // product where the user should see it. Room = real scale on the floor in front of the user; Table = a miniature
 // (~0.8 m across) at table height 0.5 m in front. Exit restores everything the session changed.
-import { xrPrefs, applyQuality } from './quality.js?v=71f24a4105';
+import { xrPrefs, applyQuality } from './quality.js?v=cf89c6d346';
 
 const TABLE_HEIGHT = 0.8, TABLE_SIZE = 0.8, TABLE_GAP = 0.3, ROOM_GAP = 0.6;   // table gap 0.3: far edge ~1.1 m, in reach (hands, seated)
 let current = null;
@@ -21,8 +21,8 @@ export function startNotice(mode, ua = navigator.userAgent) {   // exported for 
       + 'otherwise it pauses. This page shows the headset view once it runs.'
       + '<div style="margin-top:10px;font-size:12.5px;color:#555">Faster: open this page in the <b>Quest Browser</b> on the '
       + 'headset itself - no Link, so no long wait. The slow start over Link comes from the browser security '
-      + 'sandbox (a Chrome / Meta issue); starting Chrome with the option <b>--disable-features=XRSandbox</b> may '
-      + 'shorten it (this lowers a security setting - use that Chrome for VR only).</div>'
+      + 'sandbox (a known browser issue); starting the browser with the option <b>--disable-features=XRSandbox</b> may '
+      + 'shorten it (this lowers a security setting - use that browser for VR only).</div>'
       : 'Allow the request in the headset if it asks.');
   document.body.appendChild(el);
   return el;
@@ -35,11 +35,11 @@ export async function enterXR(mode, host) {
   const mark = what => trace.push({ what, s: +((performance.now() - t0) / 1000).toFixed(2), at: new Date().toISOString().slice(11, 19) });
   mark('click ' + mode);
   const restoreQuality = applyQuality(renderer, scene);
-  const introModule = import('./intro.js?v=71f24a4105'), manipModule = import('./manipulate.js?v=71f24a4105'), inputModule = import('./input.js?v=71f24a4105'), interactModule = import('./interact.js?v=71f24a4105'), handsOnModule = import('./handson.js?v=71f24a4105');
-  const arModule = mode === 'immersive-ar' ? import('./ar.js?v=71f24a4105') : null;
-  const locoModule = mode === 'immersive-vr' ? import('./locomotion.js?v=71f24a4105') : null;   // AR: the real room is the floor
+  const introModule = import('./intro.js?v=cf89c6d346'), manipModule = import('./manipulate.js?v=cf89c6d346'), inputModule = import('./input.js?v=cf89c6d346'), interactModule = import('./interact.js?v=cf89c6d346'), handsOnModule = import('./handson.js?v=cf89c6d346');
+  const arModule = mode === 'immersive-ar' ? import('./ar.js?v=cf89c6d346') : null;
+  const locoModule = mode === 'immersive-vr' ? import('./locomotion.js?v=cf89c6d346') : null;   // AR: the real room is the floor
   const mq = new URLSearchParams(location.search).get('mirror');   // desktop (Quest Link): the VR view on the PC screen
-  const mirrorModule = mq === '1' || (mq !== '0' && !/OculusBrowser|Mobile|Android/.test(navigator.userAgent)) ? import('./mirror.js?v=71f24a4105') : null;
+  const mirrorModule = mq === '1' || (mq !== '0' && !/OculusBrowser|Mobile|Android/.test(navigator.userAgent)) ? import('./mirror.js?v=cf89c6d346') : null;
   const notice = startNotice(mode);
   const session = await navigator.xr.requestSession(mode, {
     requiredFeatures: ['local-floor'],

@@ -18,8 +18,8 @@ New Horizons and SOHO spacecraft, each with its own assembly instructions from t
 | Device | How |
 |---|---|
 | **Meta Quest** | Open the link in the **Quest Browser**, pick the kit, press **Enter VR**. Hands or controllers. |
-| **Android phone** | Chrome, **Enter AR**: the kit stands on your real table or floor. |
-| **Desktop / laptop / iPhone** | Any current browser: 3D player with mouse, touch and keyboard. |
+| **Phone with AR support** | **Enter AR**: the kit stands on your real table or floor. |
+| **Desktop / laptop / any phone** | Any current browser: 3D player with mouse, touch and keyboard. |
 
 ## In VR - built for hands
 
@@ -53,9 +53,9 @@ More public-domain kits can be added the same way: part meshes + step-by-step in
 
 - **Parts** are the kit's own meshes, one object per physical part. Their assembled positions are worked out from the
   pins and holes in the meshes.
-- **Assembly motion** is planned and collision-checked in Unity (mesh against mesh along every part's path), then
-  exported as engine-independent data - step timelines and poses - that this site plays with
-  [three.js](https://threejs.org) 0.169. A static site: no framework, no build step in the browser.
+- **Assembly motion** is planned and collision-checked in a game engine (mesh against mesh along every part's path),
+  then exported as engine-independent data - step timelines and poses - that this site plays with WebGL.
+  A static site: no framework, no build step in the browser.
 - **VR / AR** is plain [WebXR](https://immersiveweb.dev): hand tracking, world-space panels, grab-and-snap logic.
 - **Checks**: `tools/smoke_test.js` plays every kit to the end with the mouse, then starts a hands-only VR session on
   an emulated headset and places every part of every kit with emulated tracked hands (9 of 9 and 7 of 7).
@@ -64,8 +64,8 @@ More public-domain kits can be added the same way: part meshes + step-by-step in
 
 - The models are small and shown at real size: the New Horizons dowels are 6 mm thick, the SOHO pins 1.75 mm.
   In VR, pull the kit bigger with both hands.
-- iPhone / Safari has no WebXR: the 3D player works, the VR / AR buttons don't appear.
-- Quest Link + desktop Chrome: the first VR start can take 2-3 minutes.
+- Phone browsers without WebXR: the 3D player works, the VR / AR buttons don't appear.
+- Headset linked to a PC (Quest Link): the first VR start can take 2-3 minutes.
 
 ## Sources and credits
 
@@ -95,7 +95,7 @@ Reuse statements for this source, quoted as published (read on 18 November 2026)
 
 No agency or mission emblem is shown anywhere on this site. **This project is not affiliated with or endorsed by NASA.**
 
-- Controller and hand models: WebXR Input Profiles (MIT).
+- Controller and hand models: WebXR Input Profiles (MIT). 3D rendering library: three.js 0.169 (MIT).
 - A non-commercial research demo by Jeremi Ranosz, Poznań University of Economics and Business (UEP), Department of
   Information Technology (KTI).
 

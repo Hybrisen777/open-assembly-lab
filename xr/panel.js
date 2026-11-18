@@ -2,7 +2,7 @@
 // page, and buttons. Drawn on a canvas texture; ray hits are turned into canvas pixels to find the button.
 // It hangs in the rig (reference space), to the left in front of the user, so it stays put in table / room mode.
 import * as THREE from 'three';
-import { asset } from '../settings.js?v=71f24a4105';
+import { asset } from '../settings.js?v=cf89c6d346';
 
 const W_M = 0.62, ASPECT = 0.62;                          // panel width in metres, height / width
 const BLUE = '#33408f', YELLOW = '#ffb547', INK = '#111', GREY = '#767676';
