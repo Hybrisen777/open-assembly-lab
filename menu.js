@@ -1,7 +1,7 @@
 // App-level UI of the web player (port of MenuUI + IssueReporter): main menu, product browser (search + type filter +
 // cards), in-scenario HUD (Report issue / Menu), pause menu (Esc), settings, issue report form (F8), loading, toasts.
 // The product list comes from index.json (written by Unity's web export), so new exports appear without code changes.
-import { settings, SPEEDS, speedLabel, asset } from './settings.js?v=e25651f1fb';
+import { settings, SPEEDS, speedLabel, asset } from './settings.js?v=71f24a4105';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -64,7 +64,7 @@ export function showMenu() {
   for (const p of products.slice(0, 4)) f.appendChild(card(p));
   const asm = products.filter(p => isAssembly(p.mode)).length, twin = products.length - asm;
   const P = (n, one, many) => `${n} ${n === 1 ? one : many}`;
-  $('menuFooter').textContent = `${P(products.length, 'product', 'products')}  ·  ${P(asm, 'assembly guide', 'assembly guides')}     web player`;
+  $('menuFooter').textContent = `${P(asm, 'assembly guide', 'assembly guides')}     web player`;
   document.title = 'Open Assembly Lab';
 }
 
@@ -75,7 +75,7 @@ export function showProducts() {
   const g = $('grid'); g.innerHTML = '';
   for (const p of products) { const c = card(p); c.dataset.folder = p.folder; g.appendChild(c); }
   applyFilter();
-  document.title = 'Products - Open Assembly Lab';
+  document.title = 'Assemblies - Open Assembly Lab';
 }
 
 function applyFilter() {
@@ -134,7 +134,7 @@ function refreshReport() {
   t.disabled = !report.shot;
   $('shotNote').textContent = report.shot ? 'The 3D view as it was when you opened this form.' : 'No 3D view on this screen.';
 }
-const where = () => scenario ? [scenario.product.name, scenario.where()].filter(Boolean).join('  ·  ') : (view === 'products' ? 'Product list' : 'Main menu');
+const where = () => scenario ? [scenario.product.name, scenario.where()].filter(Boolean).join('  ·  ') : (view === 'products' ? 'Assembly list' : 'Main menu');
 
 function gpuName() {
   try {

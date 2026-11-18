@@ -3,10 +3,10 @@
 // callouts, click-to-identify, x-ray), OrbitCamera + ZoomInput. Menus and settings: menu.js / settings.js. Format: README.md.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { createStage, srgb } from './stage.js?v=e25651f1fb';
-import { settings, speedLabel, SPEEDS, asset, BASE_RATE } from './settings.js?v=e25651f1fb';
-import { buildShell, loadIndex, showMenu, showProducts, showLoading, hideLoading, attachScenario, modal } from './menu.js?v=e25651f1fb';
-import { offerXR } from './xr/detect.js?v=e25651f1fb';
+import { createStage, srgb } from './stage.js?v=71f24a4105';
+import { settings, speedLabel, SPEEDS, asset, BASE_RATE } from './settings.js?v=71f24a4105';
+import { buildShell, loadIndex, showMenu, showProducts, showLoading, hideLoading, attachScenario, modal } from './menu.js?v=71f24a4105';
+import { offerXR } from './xr/detect.js?v=71f24a4105';
 
 const $ = id => document.getElementById(id);
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -32,7 +32,7 @@ else {
   const entry = index.find(p => p.folder === folder);
   showLoading(entry?.name || folder);
   const useTwin = entry?.mode === 'twin' || (entry?.mode === 'both' && params.get('use') === '1');   // "both": the use phase
-  if (useTwin) await import('./twin.js?v=e25651f1fb').then(m => m.runTwin(folder, entry)).catch(fail);              // digital twins
+  if (useTwin) await import('./twin.js?v=71f24a4105').then(m => m.runTwin(folder, entry)).catch(fail);              // digital twins
   else await run(folder, entry).catch(fail);
 }
 
