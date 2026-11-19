@@ -9,8 +9,8 @@ parts to the finished model, next to the original instruction page - and in VR y
 hands, on a table in front of you.
 
 Everything shown here comes from sources that are free to reuse: NASA's 3D-printable models of the New Horizons and
-SOHO spacecraft, and three sub-assemblies of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
-from the same source.
+SOHO spacecraft, three sub-assemblies of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
+from the same source - and a piano bench from a 1912 woodworking book that comes with no 3D parts at all.
 
 ![A step of the New Horizons kit in the desktop player](media/desktop-step.png)
 
@@ -107,7 +107,28 @@ the text names M3 x 12mm motor screws where the CAD has M3 x 10mm.
 
 ![A step of the Z-axis in the desktop player](media/desktop-farmbot-z-axis.png)
 
-More assemblies can be added the same way: part meshes + step-by-step instructions in, a scenario out.
+**Mission furniture: piano bench** - 3 steps, 18 parts, from "Mission Furniture: How to Make It, Part Three" by
+H. H. Windsor (1912). The book has a picture, one dimensioned drawing, a stock list and a paragraph of prose - no 3D
+parts. Every piece of stock is modelled from the stock list and the drawing, inches converted to millimetres, with its
+tenons, mortises and housed ends, and is shown already cut. The three steps are the book's own three sentences of
+assembly: the ends first, then the stretcher and side rails, then the top.
+
+What the book does not give, and what was assumed (the only invented numbers):
+- rail tenons 1/2 in long, 3/8 in thick, 1/2 in in from each edge of the rail - the stock lengths allow up to 1-1/2 in,
+  but two rails meet inside each 1-1/2 in post;
+- slats and stretcher ends housed 1/2 in deep; the stretcher's end is housed whole and blind, as the drawing's dashed
+  outline suggests;
+- side rails centred on the posts like the end rails, slats centred between the posts, the top centred on the frame
+  (2 in over at each end follows from the drawing's 40, 33 and 1-1/2 in).
+
+Not shown: cutting, planing and finishing (the scenario starts from cut parts), the hot glue, and the glued blocks and
+screws or angle irons that hold the top - the book gives no sizes for them. The stock list gives rough mill sizes
+(the top 16-1/2 by 40-1/2 in); the parts are built to the drawing's finished sizes (16 by 40 in).
+
+![A step of the piano bench in the desktop player](media/desktop-piano-bench.png)
+
+More assemblies can be added the same way: part meshes + step-by-step instructions in, a scenario out - or, as with
+the bench, a stock list and a drawing in.
 
 ## How it's made
 
@@ -118,8 +139,8 @@ More assemblies can be added the same way: part meshes + step-by-step instructio
   A static site: no framework, no build step in the browser.
 - **VR / AR** is plain [WebXR](https://immersiveweb.dev): hand tracking, world-space panels, grab-and-snap logic.
 - **Checks**: `tools/smoke_test.js` plays every kit to the end with the mouse, then starts a hands-only VR session on
-  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7, 43 of 43, 68 of 68
-  and 54 of 54).
+  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7, 43 of 43, 68 of 68,
+  54 of 54 and 18 of 18).
 
 ## Known limitations
 
@@ -137,6 +158,11 @@ More assemblies can be added the same way: part meshes + step-by-step instructio
 - Headset linked to a PC (Quest Link): the first VR start can take 2-3 minutes.
 
 ## Sources and credits
+
+**Piano bench** - "A Piano Bench" in *Mission Furniture: How to Make It, Part Three* by H. H. Windsor, Popular Mechanics
+Company, Chicago, 1912: picture, drawing, stock list and text.
+[Project Gutenberg ebook 23666](https://www.gutenberg.org/ebooks/23666), which states that the book is in the public
+domain in the United States. If you are elsewhere, check the law of your country.
 
 **Gantry wheel plate**, **cross-slide** and **Z-axis** - from the FarmBot Genesis v1.5 documentation
 ([Assemble the gantry wheel plates](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/gantry/assemble-the-gantry-wheel-plates),

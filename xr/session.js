@@ -2,7 +2,7 @@
 // The scene is not moved: a rig group carries the camera and the hands / controllers, and its transform puts the
 // product where the user should see it. Room = real scale on the floor in front of the user; Table = a miniature
 // (~0.8 m across) at table height 0.5 m in front. Exit restores everything the session changed.
-import { xrPrefs, applyQuality } from './quality.js?v=314f59e0b5';
+import { xrPrefs, applyQuality } from './quality.js?v=e0f74eaa5f';
 
 const TABLE_HEIGHT = 0.8, TABLE_SIZE = 0.8, TABLE_GAP = 0.3, ROOM_GAP = 0.6;   // table gap 0.3: far edge ~1.1 m, in reach (hands, seated)
 let current = null;
@@ -35,11 +35,11 @@ export async function enterXR(mode, host) {
   const mark = what => trace.push({ what, s: +((performance.now() - t0) / 1000).toFixed(2), at: new Date().toISOString().slice(11, 19) });
   mark('click ' + mode);
   const restoreQuality = applyQuality(renderer, scene);
-  const introModule = import('./intro.js?v=314f59e0b5'), manipModule = import('./manipulate.js?v=314f59e0b5'), inputModule = import('./input.js?v=314f59e0b5'), interactModule = import('./interact.js?v=314f59e0b5'), handsOnModule = import('./handson.js?v=314f59e0b5');
-  const arModule = mode === 'immersive-ar' ? import('./ar.js?v=314f59e0b5') : null;
-  const locoModule = mode === 'immersive-vr' ? import('./locomotion.js?v=314f59e0b5') : null;   // AR: the real room is the floor
+  const introModule = import('./intro.js?v=e0f74eaa5f'), manipModule = import('./manipulate.js?v=e0f74eaa5f'), inputModule = import('./input.js?v=e0f74eaa5f'), interactModule = import('./interact.js?v=e0f74eaa5f'), handsOnModule = import('./handson.js?v=e0f74eaa5f');
+  const arModule = mode === 'immersive-ar' ? import('./ar.js?v=e0f74eaa5f') : null;
+  const locoModule = mode === 'immersive-vr' ? import('./locomotion.js?v=e0f74eaa5f') : null;   // AR: the real room is the floor
   const mq = new URLSearchParams(location.search).get('mirror');   // desktop (Quest Link): the VR view on the PC screen
-  const mirrorModule = mq === '1' || (mq !== '0' && !/OculusBrowser|Mobile|Android/.test(navigator.userAgent)) ? import('./mirror.js?v=314f59e0b5') : null;
+  const mirrorModule = mq === '1' || (mq !== '0' && !/OculusBrowser|Mobile|Android/.test(navigator.userAgent)) ? import('./mirror.js?v=e0f74eaa5f') : null;
   const notice = startNotice(mode);
   const session = await navigator.xr.requestSession(mode, {
     requiredFeatures: ['local-floor'],

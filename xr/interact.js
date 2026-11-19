@@ -2,9 +2,9 @@
 // Selecting a part is the same as a mouse click on the desktop (host.select: glow + identify), its label shows on a
 // small tag above the part. Hover = a wire box around the part / a highlighted panel button.
 import * as THREE from 'three';
-import { createPanel } from './panel.js?v=314f59e0b5';
-import { createPageView } from './pageview.js?v=314f59e0b5';
-import { xrPrefs } from './quality.js?v=314f59e0b5';
+import { createPanel } from './panel.js?v=e0f74eaa5f';
+import { createPageView } from './pageview.js?v=e0f74eaa5f';
+import { xrPrefs } from './quality.js?v=e0f74eaa5f';
 
 const RAY_MAX = 8, YELLOW = 0xffb547;
 

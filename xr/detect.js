@@ -22,7 +22,7 @@ export async function offerXR(host, n = 0) {
     b.className = 'btn blue'; b.textContent = label; b.dataset.mode = mode;
     b.addEventListener('click', async () => {
       b.disabled = true; b.title = ''; b.textContent = 'Starting…';   // Quest Link: up to ~1.5 min (README)
-      try { await (await import('./session.js?v=314f59e0b5')).enterXR(mode, host); }
+      try { await (await import('./session.js?v=e0f74eaa5f')).enterXR(mode, host); }
       catch (e) { console.error('WebXR:', e); b.title = 'Could not start: ' + (e?.message || e); }
       finally { b.disabled = false; b.textContent = label; b.blur(); }
     });

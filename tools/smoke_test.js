@@ -22,6 +22,7 @@ const KITS = [
   { slug: 'farmbot-gantry-wheel-plate', steps: 5, parts: 43, page: { t: 3.2, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot.png' } },
   { slug: 'farmbot-cross-slide', steps: 8, parts: 68, page: { t: 118.0, rx: /p06/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot-cross-slide.png' } },
   { slug: 'farmbot-z-axis', steps: 10, parts: 54, page: { t: 26.0, rx: /p05/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot-z-axis.png' } },
+  { slug: 'mission-piano-bench', steps: 3, parts: 18, page: { t: 17.0, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-piano-bench.png' } },
 ];
 
 const fails = [];

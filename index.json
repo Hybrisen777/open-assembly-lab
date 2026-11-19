@@ -44,6 +44,15 @@
       "mode": "assembly",
       "thumbnail": "thumbnail.png",
       "steps": 10
+    },
+    {
+      "folder": "mission-piano-bench",
+      "name": "Mission furniture: piano bench",
+      "id": "H. H. Windsor, Mission Furniture, Part Three (1912)",
+      "category": "Furniture from a book",
+      "mode": "assembly",
+      "thumbnail": "thumbnail.png",
+      "steps": 3
     }
   ],
   "issuesUrl": "https://github.com/Hybrisen777/open-assembly-lab/issues/new"
