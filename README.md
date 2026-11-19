@@ -9,7 +9,7 @@ parts to the finished model, next to the original instruction page - and in VR y
 hands, on a table in front of you.
 
 Everything shown here comes from sources that are free to reuse: NASA's 3D-printable models of the New Horizons and
-SOHO spacecraft, and two sub-assemblies of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
+SOHO spacecraft, and three sub-assemblies of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
 from the same source.
 
 ![A step of the New Horizons kit in the desktop player](media/desktop-step.png)
@@ -86,6 +86,27 @@ left out. One photograph of step 7 is not shown because the motor label in it ca
 
 ![A step of the cross-slide in the desktop player](media/desktop-farmbot-cross-slide.png)
 
+**FarmBot Genesis v1.5: Z-axis** - 10 steps, 54 parts: the one-metre extrusion with its motor and mount, shaft coupling,
+four cable carrier supports, vacuum pump with cover and mount, hardstops and motor housing - nut bars, tee nuts and
+every screw as their own parts at their CAD positions. Steps 1-7 are built lying on the bench: brackets get their screws
+and nut bar loosely first and are then slid into the extrusion's slot from its free end, the only way a nut bar goes in.
+In step 8 the Z-axis is stood up and lowered through the V-wheels of the finished cross-slide onto the leadscrew, and
+steps 9-10 add the hardstops and the motor housing upright.
+
+Not shown in this assembly, because the player cannot represent it:
+- the two zip ties that hold the vacuum pump on its mount (step 6);
+- the gantry: in step 8 the finished cross-slide, which is one part here, hangs in the air where the gantry main beam
+  would hold it;
+- adjusting the eccentric spacers and tightening the coupling's screws (steps 3 and 8) - the coupling's lower screws are
+  put in at step 3 with the upper ones;
+- the tools (2.5mm hex key, 3mm hex driver) and all tightening.
+
+Changed for the browser: the leadscrew's thread is modelled in the CAD with 463,000 triangles and is shown with 4 % of
+them; the cross-slide unit comes from a coarser export. Everything else is the CAD's own mesh. As with the cross-slide,
+the text names M3 x 12mm motor screws where the CAD has M3 x 10mm.
+
+![A step of the Z-axis in the desktop player](media/desktop-farmbot-z-axis.png)
+
 More assemblies can be added the same way: part meshes + step-by-step instructions in, a scenario out.
 
 ## How it's made
@@ -97,13 +118,18 @@ More assemblies can be added the same way: part meshes + step-by-step instructio
   A static site: no framework, no build step in the browser.
 - **VR / AR** is plain [WebXR](https://immersiveweb.dev): hand tracking, world-space panels, grab-and-snap logic.
 - **Checks**: `tools/smoke_test.js` plays every kit to the end with the mouse, then starts a hands-only VR session on
-  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7, 43 of 43 and
-  68 of 68).
+  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7, 43 of 43, 68 of 68
+  and 54 of 54).
 
 ## Known limitations
 
 - The models are small and shown at real size: the New Horizons dowels are 6 mm thick, the SOHO pins 1.75 mm.
   In VR, pull the kit bigger with both hands. The gantry wheel plate has M5 hardware: nuts and spacers of about 1 cm.
+- Z-axis: the kit is a metre long, so VR Table mode shows it at about half size (0.47) - an M5 screw head then looks
+  4 mm wide. Pull the kit bigger with both hands.
+- The hands-only check closes the emulated fingers on the part before pinching. Aimed with an open hand and snapped
+  shut, the emulator's pinch point jumps 77 mm and misses thin large parts (the Z-axis extrusion, the leadscrew, the pump
+  mount on edge), which can be picked up only within 4 cm.
 - Gantry wheel plate: the locknuts and the nut-bar screws are fitted on the far side of the plate; the camera turns
   there by itself on the desktop, in VR you reach around the plate. The hands-only check uses an emulated headset; it
   shows that every part can be picked up and placed by pinching, not how comfortable that is with real hands.
@@ -112,12 +138,14 @@ More assemblies can be added the same way: part meshes + step-by-step instructio
 
 ## Sources and credits
 
-**Gantry wheel plate** and **cross-slide** - from the FarmBot Genesis v1.5 documentation
+**Gantry wheel plate**, **cross-slide** and **Z-axis** - from the FarmBot Genesis v1.5 documentation
 ([Assemble the gantry wheel plates](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/gantry/assemble-the-gantry-wheel-plates),
-[Cross-slide](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/cross-slide): steps, text and pictures) and the
+[Cross-slide](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/cross-slide),
+[Z-axis](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/z-axis): steps, text and pictures) and the
 FarmBot Genesis CAD model on Onshape
 ([document, version v1.5](https://cad.onshape.com/documents/6626b842adca229e69544ad1/v/d2f8602693fe1c17dfeb2b8b/e/33c3dd58328095f9e1e1dcee):
-the "Gantry Wheel Plate" assembly, left-hand configuration, and the "Cross-Slide" assembly, exported as GLB). Both are by FarmBot Inc. and, according
+the "Gantry Wheel Plate" assembly, left-hand configuration, the "Cross-Slide" and "Z-Axis" assemblies, and the whole
+machine for the position of the cross-slide on the Z-axis; exported as GLB). Both are by FarmBot Inc. and, according
 to its [licensing page](https://meta.farm.bot/v2026/farmbot/intro/licensing) (read on 18 November 2026), published
 under the CC0 Public Domain Dedication:
 > "The FarmBot CAD models are licensed under the CC0 Public Domain Dedication." -

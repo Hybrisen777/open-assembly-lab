@@ -3,7 +3,7 @@
 // High-resolution pages (manual_hd/, rendered from the PDFs) are used when they exist, else the normal page. The
 // window follows the shown step, moves like the panel (interact.js: ray drag / direct grab) and closes with its ✕.
 import * as THREE from 'three';
-import { asset } from '../settings.js?v=0bac5eca8c';
+import { asset } from '../settings.js?v=314f59e0b5';
 
 const H = 0.8, FRAME = 0.015;                                   // page height, white frame (real metres)
 

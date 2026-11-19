@@ -35,6 +35,15 @@
       "mode": "assembly",
       "thumbnail": "thumbnail.png",
       "steps": 8
+    },
+    {
+      "folder": "farmbot-z-axis",
+      "name": "FarmBot Genesis v1.5: Z-axis",
+      "id": "FarmBot documentation and CAD (CC0)",
+      "category": "Machine sub-assemblies",
+      "mode": "assembly",
+      "thumbnail": "thumbnail.png",
+      "steps": 10
     }
   ],
   "issuesUrl": "https://github.com/Hybrisen777/open-assembly-lab/issues/new"

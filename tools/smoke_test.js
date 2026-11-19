@@ -1,5 +1,6 @@
 // Smoke test of the built site + README screenshots (media/):
-//   node tools/smoke_test.js [BASE_URL] [NODE_MODULES_DIR] [--no-shots]
+//   node tools/smoke_test.js [BASE_URL] [NODE_MODULES_DIR] [--no-shots] [--only=<kit folder>]
+// --only runs one kit: a quick partial check while working on it, not the full test.
 // BASE_URL: where the site is served (default http://localhost:8766/; the live site works too).
 // NODE_MODULES_DIR: a folder whose node_modules has @playwright/test and iwer (or set NODE_PATH / install them here).
 // Desktop: menu, kit list, every kit played to the end with the mouse, the instruction page, no third-party names.
@@ -13,12 +14,14 @@ const { chromium } = require(mod('@playwright/test'));
 const IWER_JS = fs.readFileSync(MODS ? path.join(MODS, 'iwer/build/iwer.min.js') : require.resolve('iwer/build/iwer.min.js'), 'utf8');
 const MEDIA = path.join(__dirname, '..', 'media');
 const SHOTS = !process.argv.includes('--no-shots');
+const ONLY = (process.argv.find(a => a.startsWith('--only=')) || '').slice(7);
 // page: the instruction page checked at time t (seconds) - its file name and natural size [width, max height]
 const KITS = [
   { slug: 'new-horizons', steps: 4, parts: 9, page: { t: 7.3, rx: /p03/, w: 1100, maxH: 760 }, shots: { parts: 'desktop-parts.png', done: 'desktop-done.png', step: 'desktop-step.png', vr: 'vr-table-hands.png' } },
   { slug: 'soho', steps: 4, parts: 7, page: { t: 2.8, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-soho.png' } },
   { slug: 'farmbot-gantry-wheel-plate', steps: 5, parts: 43, page: { t: 3.2, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot.png' } },
   { slug: 'farmbot-cross-slide', steps: 8, parts: 68, page: { t: 118.0, rx: /p06/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot-cross-slide.png' } },
+  { slug: 'farmbot-z-axis', steps: 10, parts: 54, page: { t: 26.0, rx: /p05/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot-z-axis.png' } },
 ];
 
 const fails = [];
@@ -54,12 +57,20 @@ const WALK = async () => {
     }
   }
   const pinch = async on => { dev.updatePinchValue(on ? 1 : 0); await sleep(110); };
+  // Close the fingers ON the part, as a hand does. The emulator's pinch point moves 77 mm (real) between the open and the
+  // closed hand; aimed open and then snapped shut, it lands outside the 4 cm reach of thin large parts (a rod, a plate on
+  // edge) and nothing is picked up. So: close nearly all the way, aim again, then close.
+  async function pinchAt(c) {
+    dev.updatePinchValue(0.8); await sleep(90);                      // nearly closed: not yet a pinch
+    if (!side.grabPressed && !H.debug().held.right) await setGrip(new T.Matrix4().compose(c, side.grabPose.quaternion, new T.Vector3(1, 1, 1)));
+    dev.updatePinchValue(1); await sleep(150);
+  }
   const snaps = () => __ev.filter(e => e.type === 'snap').length;
   const out = { input: side.type, scale: xrSession.scaleMode, steps: S, carries: 0, snapped: 0, fails: [], stuck: null };
   xrSession.setMode('handson'); host.transport.seekGlobal(host.steps[0].start + 1e-4);
   const t0 = performance.now();
   let lastKey = '', same = 0;
-  while (performance.now() - t0 < 12 * 60_000) {
+  while (performance.now() - t0 < 25 * 60_000) {
     const d = H.debug();
     if (d.autoUntil != null || d.finishing) { await sleep(60); continue; }
     const free = d.expected.filter(n => !d.locked.includes(n));
@@ -75,7 +86,7 @@ const WALK = async () => {
     const name = free[0], c = host.partBox(part(name)).getCenter(new T.Vector3());
     await setGrip(new T.Matrix4().compose(c, side.grabPose.quaternion, new T.Vector3(1, 1, 1)));
     const g0 = snaps();
-    await pinch(true);
+    await pinchAt(c);
     const held = H.debug().held.right;
     if (!held && snaps() > g0) { out.carries++; out.snapped++; await pinch(false); continue; }   // was already within its snap distance
     if (!held) { out.fails.push({ step: d.step, part: name, why: 'not grabbed' }); await pinch(false); H.skipMove(); continue; }
@@ -116,7 +127,7 @@ const WALK = async () => {
   const cards = await page.locator('#grid a').count();
   check(cards === KITS.length, `kit browser: ${cards} card(s)`);
 
-  for (const kit of KITS) {
+  for (const kit of KITS.filter(k => !ONLY || k.slug === ONLY)) {
     const K = `[${kit.slug}] `;
     await page.goto('player.html?p=' + kit.slug);
     await ready(page);
@@ -153,7 +164,7 @@ const WALK = async () => {
   await ctx.close();
 
   // ---------------- VR, tracked hands only ----------------
-  for (const kit of KITS) {
+  for (const kit of KITS.filter(k => !ONLY || k.slug === ONLY)) {
     const K = `[${kit.slug}] `;
     ctx = await browser.newContext({ baseURL: BASE, viewport: { width: 1280, height: 800 } });
     page = await ctx.newPage(); msgs = watch(page);
@@ -174,7 +185,7 @@ const WALK = async () => {
     await page.waitForFunction(() => xrSession.handsTable && xrSession.scaleMode === 'table' && xrSession.placed, null, { timeout: 30_000 }).catch(() => {});
     const xr = await page.evaluate(() => ({ hands: xrSession.input.sides.right.type, table: !!xrSession.handsTable, mode: xrSession.scaleMode, scale: +xrSession.rig.scale.x.toFixed(3),
       panel: !!xrSession.panel, handsOn: !!xrSession.handsOn }));
-    check(xr.hands === 'hand' && xr.table && xr.mode === 'table', K + `VR with hands only: input ${xr.hands}, mode ${xr.mode}, model shown at ${xr.scale}x, panel ${xr.panel}`);
+    check(xr.hands === 'hand' && xr.table && xr.mode === 'table', K + `VR with hands only: input ${xr.hands}, mode ${xr.mode}, kit shown at ${(1 / xr.scale).toFixed(2)} of real size, panel ${xr.panel}`);
     if (SHOTS && kit.shots.vr) {   // look down at the table for the picture (the emulated headset starts level)
       await page.evaluate(() => { const a = -38 * Math.PI / 360; xrDevice.quaternion.set(Math.sin(a), 0, 0, Math.cos(a)); });
       await page.waitForTimeout(2500);
@@ -192,6 +203,6 @@ const WALK = async () => {
   }
 
   await browser.close();
-  console.log(fails.length ? `\n${fails.length} check(s) FAILED` : '\nall checks passed');
+  console.log(fails.length ? `\n${fails.length} check(s) FAILED` : ONLY ? `\nall checks passed for ${ONLY} only (partial run)` : '\nall checks passed');
   process.exit(fails.length ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(2); });
