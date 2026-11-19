@@ -9,7 +9,7 @@ parts to the finished model, next to the original instruction page - and in VR y
 hands, on a table in front of you.
 
 Everything shown here comes from sources that are free to reuse: NASA's 3D-printable models of the New Horizons and
-SOHO spacecraft, and one sub-assembly of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
+SOHO spacecraft, and two sub-assemblies of the FarmBot Genesis v1.5 machine - each with its own assembly instructions
 from the same source.
 
 ![A step of the New Horizons kit in the desktop player](media/desktop-step.png)
@@ -65,6 +65,27 @@ Also different from a real workbench: a screw stands on its head on the mat whil
 
 ![A step of the gantry wheel plate in the desktop player](media/desktop-farmbot.png)
 
+**FarmBot Genesis v1.5: cross-slide** - 8 steps, 68 parts: the plate with its twelve V-wheels (seven for the gantry
+beam on one side, five for the Z-axis on the other), the leadscrew block, the stepper motor in its housing with the
+pulley, and the cable carrier mount; again every screw, spacer, nut and setscrew is its own part at its CAD position.
+Steps 1-5 are built part by part. At step 2 the half-built cross-slide is turned over, as the documentation says, and
+the motor goes into its housing before both go onto the plate.
+
+Not shown in this assembly, because the player cannot represent it:
+- step 6, adjusting the eccentric spacers - text only, nothing moves;
+- step 7, sliding the cross-slide onto the gantry main beam - text and picture only: the beam belongs to the gantry,
+  which is already standing at that point, and the player can only lower an assembly straight down onto parts laid out
+  beforehand, not slide it along a rail;
+- step 8, the timing belt with its two belt clips, nut bars and screws on the beam - text and pictures only;
+- the tools (3mm hex driver, 8mm box wrench, 2mm driver) and all tightening.
+
+Where the CAD model and the documentation differ, the parts follow the CAD and the text follows the documentation:
+the text names M3 x 12mm motor screws, the CAD has M3 x 10mm; the pictures show the leadscrew block's screw heads on
+the gantry side, the CAD has them on the block; the CAD's cable carrier spacer block is in no step of this page and is
+left out. One photograph of step 7 is not shown because the motor label in it carries the company's wordmark.
+
+![A step of the cross-slide in the desktop player](media/desktop-farmbot-cross-slide.png)
+
 More assemblies can be added the same way: part meshes + step-by-step instructions in, a scenario out.
 
 ## How it's made
@@ -76,7 +97,8 @@ More assemblies can be added the same way: part meshes + step-by-step instructio
   A static site: no framework, no build step in the browser.
 - **VR / AR** is plain [WebXR](https://immersiveweb.dev): hand tracking, world-space panels, grab-and-snap logic.
 - **Checks**: `tools/smoke_test.js` plays every kit to the end with the mouse, then starts a hands-only VR session on
-  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7 and 43 of 43).
+  an emulated headset and places every part of every kit with emulated tracked hands (9 of 9, 7 of 7, 43 of 43 and
+  68 of 68).
 
 ## Known limitations
 
@@ -90,11 +112,12 @@ More assemblies can be added the same way: part meshes + step-by-step instructio
 
 ## Sources and credits
 
-**Gantry wheel plate** - from the FarmBot Genesis v1.5 documentation
-([Assemble the gantry wheel plates](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/gantry/assemble-the-gantry-wheel-plates):
-steps, text and pictures) and the FarmBot Genesis CAD model on Onshape
+**Gantry wheel plate** and **cross-slide** - from the FarmBot Genesis v1.5 documentation
+([Assemble the gantry wheel plates](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/gantry/assemble-the-gantry-wheel-plates),
+[Cross-slide](https://genesis.farm.bot/v1.5/FarmBot-Genesis-V1.5/cross-slide): steps, text and pictures) and the
+FarmBot Genesis CAD model on Onshape
 ([document, version v1.5](https://cad.onshape.com/documents/6626b842adca229e69544ad1/v/d2f8602693fe1c17dfeb2b8b/e/33c3dd58328095f9e1e1dcee):
-the "Gantry Wheel Plate" assembly, left-hand configuration, exported as GLB). Both are by FarmBot Inc. and, according
+the "Gantry Wheel Plate" assembly, left-hand configuration, and the "Cross-Slide" assembly, exported as GLB). Both are by FarmBot Inc. and, according
 to its [licensing page](https://meta.farm.bot/v2026/farmbot/intro/licensing) (read on 18 November 2026), published
 under the CC0 Public Domain Dedication:
 > "The FarmBot CAD models are licensed under the CC0 Public Domain Dedication." -

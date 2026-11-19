@@ -18,6 +18,7 @@ const KITS = [
   { slug: 'new-horizons', steps: 4, parts: 9, page: { t: 7.3, rx: /p03/, w: 1100, maxH: 760 }, shots: { parts: 'desktop-parts.png', done: 'desktop-done.png', step: 'desktop-step.png', vr: 'vr-table-hands.png' } },
   { slug: 'soho', steps: 4, parts: 7, page: { t: 2.8, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-soho.png' } },
   { slug: 'farmbot-gantry-wheel-plate', steps: 5, parts: 43, page: { t: 3.2, rx: /p02/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot.png' } },
+  { slug: 'farmbot-cross-slide', steps: 8, parts: 68, page: { t: 118.0, rx: /p06/, w: 1100, maxH: 760 }, shots: { step: 'desktop-farmbot-cross-slide.png' } },
 ];
 
 const fails = [];
@@ -58,7 +59,7 @@ const WALK = async () => {
   xrSession.setMode('handson'); host.transport.seekGlobal(host.steps[0].start + 1e-4);
   const t0 = performance.now();
   let lastKey = '', same = 0;
-  while (performance.now() - t0 < 6 * 60_000) {
+  while (performance.now() - t0 < 12 * 60_000) {
     const d = H.debug();
     if (d.autoUntil != null || d.finishing) { await sleep(60); continue; }
     const free = d.expected.filter(n => !d.locked.includes(n));
